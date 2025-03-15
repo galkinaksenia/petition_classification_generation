@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика</title>
+</head>
+<body>
+{% extends "base_generic.html" %}
+{% block content %}  
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+    <div class="container">  
+        <h1>Статистика заявок</h1>  
+        <a href="{% url 'comment_list' %}" class="btn btn-secondary mt-2">Назад к обращениям</a>  
+
+        <h3>Общая информация</h3>  
+        <p>Общее количество обращений: <strong>{{ total_comments }}</strong></p>
+
+        <h3>График по категориям обращений</h3>  
+        <img src="data:image/png;base64,{{ status_chart }}" alt="График по категориям обращений" class="img-fluid">  
+
+        <h3>Статистика по категориям обращений</h3>  
+        <ul class="list-group">  
+            {% for cat in category_counts %}  
+                <li class="list-group-item">{{ cat.category }} - {{ cat.category_count }} обращений</li>  
+            {% empty %}  
+                <li class="list-group-item">Статистика не найдена.</li>  
+            {% endfor %}  
+        </ul>
+    </div>
+{% endblock %}
+</body>
+</html>

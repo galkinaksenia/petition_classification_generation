@@ -1,0 +1,81 @@
+<!DOCTYPE html>  
+<html lang="ru">  
+<head>
+
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Обработка обращений</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha256-2TnSHycBDAm2wpZmgdi0z81kykGPJAkiUY+Wf97RbvY=" crossorigin="anonymous">
+    <style>  
+        body {  
+            font-family: Arial, sans-serif; /* Начальный шрифт */  
+            background-color: #f8f9fa; /* Светло-серый фон */  
+            color: #343a40; /* Темно-серый текст для контраста */ 
+            justify-content: space-between;
+        }  
+        h3 {  
+            text-align: center; /* Выравнивание заголовков по центру */  
+        }
+        div {
+                background: #DCDCDC; /* Цвет фона */
+                padding: 20px; /* Поля вокруг текста */
+                margin-top: 20px; /* Отступ сверху */
+            }
+        .table {  
+            background-color: #ffffff; /* Белый фон для таблицы */  
+        }  
+        .table-striped tbody tr:nth-of-type(odd) {  
+            background-color: #f2f2f2; /* Нейтральный светлый фон для четных строк таблицы */  
+        }  
+        .btn-link {  
+            color: #007bff; /* Цвет для ссылок */  
+        }  
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 10px;
+        }
+        nav li {
+            margin-right: 20px;
+        }
+    </style>  
+</head>  
+<body>  
+{% load static %}
+    <header>  
+        <div class="container heading-text text-center">
+            <h1>Система управления обращениями</h1>
+        </div>
+          
+        <div class="container">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-secondary mt-2">Выход</button>
+            </form>
+        </div>
+    </header>  
+    <main>  
+        {% block content %}  
+        {% endblock %}  
+    </main>  
+    <footer>  
+        <p>&copy; 2025 Администрация Ленинского района г. Н. Новгорода</p>  
+    </footer>  
+            <!-- Всплывающее окно для уведомлений -->  
+        {% if messages %}  
+            {% for message in messages %}  
+                <div class="alert alert-success alert-dismissible fade show" role="alert">  
+                    {{ message }}  
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">  
+                        <span aria-hidden="true">&times;</span>  
+                    </button>  
+                </div>  
+            {% endfor %}  
+        {% endif %}  
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>  
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+</body>  
+</html>

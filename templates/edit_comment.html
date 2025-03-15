@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование обращений</title>
+</head>
+<body>
+{% extends "base_generic.html" %}  
+
+{% block content %}  
+  <h2>Редактировать обращение</h2>  
+  <form method="post">  
+    {% csrf_token %}  
+    {{ form.as_p }}  
+    <button class="btn btn-secondary mt-2" type="submit">Сохранить изменения</button>  
+  </form>  
+  <a class="btn btn-secondary mt-2" href="{% url 'comment_list' %}">Назад к обращениям</a>  
+{% endblock %}
+</body>
+</html>

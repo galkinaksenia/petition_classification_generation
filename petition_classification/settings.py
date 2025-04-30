@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k_fyah(=hkbes$5ir4a&+*i91gem__c%e(*vgm1y^ho(6-!he2'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -100,13 +100,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'petitions_db',
         'USER': 'postgres',
-        'PASSWORD': 'ChibiM00n!1',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
 
-VK_ACCESS_TOKEN = 'J8uO452Wp5oKZ4YtsTwi'
+VK_ACCESS_TOKEN = ''
 
 LOGIN_URL = 'register'  # Имя URL для страницы входа
 LOGIN_REDIRECT_URL = 'comment_list'  # Имя URL для перенаправления после входа

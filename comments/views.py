@@ -149,7 +149,7 @@ def fetch_vk_comments(owner_id, start_date):
                 'owner_id': '-211041018',
                 'count': 10,
                 'offset': offset,
-                'access_token': 'cf09d637cf09d637cf09d6377bcc21978accf09cf09d637a89e881907ac9fa80ffff3b0',
+                'access_token': '',
                 'v': '5.131'  # Используйте последнюю версию API
             }
         )
@@ -162,7 +162,7 @@ def fetch_vk_comments(owner_id, start_date):
             break
         time.sleep(1)  # Обязательно добавьте задержку, чтобы не превышать лимиты API
     try:
-        vk_session = vk_api.VkApi(token='cf09d637cf09d637cf09d6377bcc21978accf09cf09d637a89e881907ac9fa80ffff3b0')
+        vk_session = vk_api.VkApi(token='')
         vk = vk_session.get_api()
         for post in all_posts:
             post_id = post['id']
@@ -217,7 +217,7 @@ def generate_answer_model(examples, petition):
                        HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
                        HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE}
     model = GoogleGenerativeAI(model='gemini-2.0-flash-exp',
-                               api_key='AIzaSyCo48Nu9dcYIkzvDMQYE1sW8TbTtpXcj_o',
+                               api_key='',
                                temperature=0.9,
                                safety_settings=safety_settings,
                                frequencyPenalty=1.2,
@@ -294,38 +294,3 @@ def comment_statistics(request):
         'status_chart': img_b64,  # передаем изображение диаграммы в контекст
     }
     return render(request, 'comment_statistics.html', context)
-
-
-
-'''
-@login_required
-def fetch_vk_comments(request):
-    if request.method == "POST":
-        group_id = request.POST.get('group_id')  # ID сообщества
-        post_id = request.POST.get('post_id')    # ID поста, к которому получаем комментарии
-
-        # Инициализация сессии ВК
-        vk_session = vk_api.VkApi(token=settings.VK_ACCESS_TOKEN)
-        vk = vk_session.get_api()
-
-        try:
-            # Получение комментариев
-            comments = vk.wall.getComments(owner_id=-int(group_id), post_id=post_id)
-
-            # Обработка комментариев и сохранение в базу данных
-            for comment in comments['items']:
-                Comment.objects.get_or_create(
-                    vk_comment_id=comment['id'],
-                    content=comment['text'],
-                    user=request.user,
-                    status='pending',
-                    category='default'  # Можно добавить логику для классификации
-                )
-
-            return JsonResponse({'status': 'success', 'message': 'Комментарии успешно загружены.'})
-
-        except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)})
-
-    return JsonResponse({'status': 'error', 'message': 'Неверный метод запроса.'})
-'''
